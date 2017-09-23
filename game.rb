@@ -22,6 +22,12 @@ end
     give_out_cards
   end
 
+  def skip_move
+  end
+
+  def open_cards
+  end
+
   def play_again
     puts "введите (У) что бы продолжить играть "
     tmp = gets.chomp.capitalize
@@ -49,4 +55,30 @@ end
     @deck.take_card(@diller)
   end
 
+  def player_win
+    player_win_bank if @player.score <= 21 && @player.score > @diller.score
+  end
+  def player_win_bank
+    
+  end
+
+  def diller_win
+    diller_win_bank if @diller.score <= 21 && @diller.score > @player.score
+  end
+  def diller_win_bank
+    
+  end
+
+  def draw
+  end
+
 end
+
+
+
+
+
+
+
+
+

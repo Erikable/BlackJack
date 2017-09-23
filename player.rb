@@ -7,9 +7,11 @@ class Player
 
   end
 
-  def count_score
+  def score
     score = 0
-
+    @cards.each do |card|
+      score += card.value
+    end
   end
 
   def display_cards
