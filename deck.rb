@@ -1,7 +1,7 @@
 class Deck
 
-  VALUE = %w[2 3 4 5 6 7 8 9 10 A K Q J]
-  COLOR = %w[+ <3 ^ <>]
+  VALUE = [2, 3, 4, 5, 6, 7, 8, 9, 10, "A", "K", "Q", "J"]
+  COLOR = %w[♠ ♥ ♦ ♣]
 
   attr_accessor :deck
 
@@ -12,17 +12,16 @@ class Deck
         @deck << Card.new(value, color)
       end
     end
+    shuffle
+  end
+
+  def take_card(player)
+    player.cards << @deck[-1]
+    @deck.pop
   end
 
   def shuffle
     @deck.shuffle!
-  end
-
-
-
-
-  def sss
-    puts @deck.display
   end
 
 end

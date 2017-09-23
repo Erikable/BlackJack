@@ -1,5 +1,7 @@
 class Card
 
+  attr_accessor :value, :color
+
   def initialize (value, color)
     @value = value
     @color = color
@@ -7,6 +9,16 @@ class Card
 
   def display
     "#{@value}#{@color}"
+  end
+
+  def value
+    if @value.is_a? Integer
+      @value
+    elsif @value == "A"
+      @value = 11
+    else
+      @value = 10
+    end 
   end
 
 end

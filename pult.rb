@@ -1,10 +1,9 @@
-#require_relative ''
+require_relative 'game'
 require_relative 'deck'
 require_relative 'card'
+require_relative 'player'
 
+g = Game.new
 
-d = Deck.new
-#f = Deck.new
-d.shuffle
-d.sss
-#f.sss
+g.start_game
+g.d
