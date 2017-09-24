@@ -16,8 +16,8 @@ class Deck
   end
 
   def take_card(player)
-    player.cards << @deck[-1]
-    @deck.pop
+    player.cards << @deck.slice!(-1)
+    #@deck.pop  # stack level too deep
   end
 
   def shuffle

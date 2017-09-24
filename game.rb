@@ -1,4 +1,5 @@
 class Game
+  attr_reader :cards
 
   def initialize
     print "введите свое имя:  "
@@ -31,7 +32,7 @@ class Game
     case tmp
       when 1 then player_step
       when 2 then diller_step
-      when 3 then puts def_win
+      when 3 then def_win
       when 0 then exit
     end
   end
@@ -40,7 +41,7 @@ class Game
     puts
     puts "__________________"
     print "карты #{@name}:  " 
-    @player.display_cards
+    display_player #@player.display_cards
     puts
     puts "__________________"
     print "карты диллера:  "
@@ -65,8 +66,12 @@ class Game
     @bank += 20
   end
 
-def display
-  @player.display_cards
+def display_player
+  "карты #{@name}: #{@player.display_cards}"
+end
+
+def display_diller
+  " карты диллера: #{@diller.display_cards}"
 end
   
   def give_out_cards
@@ -77,26 +82,34 @@ end
   end
 
   def player_win?
-    
+    puts
+    display_player
     if @player.score <= 21 && (@player.score > @diller.score)
       player_win_bank
     end
   end
+
   def player_win_bank
-    puts @player.display_cards
-    puts "player win"
+    puts "#{@name} выиграл"
     @player_money += @bank
     @bank -= @bank
+    puts "денег y #{@name}: #{@player_money}"
+    #puts @player_money
+    play_again
   end
 
   def diller_win?
-    puts @diller.display_cards
+    puts
+    display_diller
     diller_win_bank if @diller.score <= 21 && @diller.score > @player.score
   end
 
   def diller_win_bank
+    puts "диллер выиграл"
     @diller_money += @bank
     @bank -= @bank
+    puts "деньги диллера: #{@diller_money}"
+    play_again
   end
 
   def draw?
@@ -105,20 +118,37 @@ end
       @diller_money += 10
       @bank -= 20
       puts "DrAW"
+      play_again
     elsif
       @player.score == @diller.score && @player.score >= 21 && @diller.score >= 21
       puts "d r a w"
+      play_again
     end
   end
 
   def player_step
-    @deck.take_card(@player)
-    @diller.cards.count == 3 ? def_win : diller_step
+    if @player.cards.count == 2
+      @deck.take_card(@player)
+      puts
+      display_player
+      diller_step
+    elsif 
+      @player.cards.count == 3
+      def_win
+    end
   end
 
   def diller_step
-    @deck.take_card(@player)
-   # @player.cards.count == 3 ? def_win : player_step
+    if @diller.cards.count == 2
+      @deck.take_card(@diller)
+      puts
+      puts "карты диллера"
+      @diller.diller_cards
+      player_step
+    elsif 
+      @diller.cards.count == 3
+      def_win
+    end
   end
 
   def def_win
