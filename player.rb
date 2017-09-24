@@ -18,4 +18,8 @@ class Player
     @cards.each {|card| print "#{card.display}  "}
   end
 
+  def diller_cards
+    @cards.count.times {print '*  '}
+  end
+
 end

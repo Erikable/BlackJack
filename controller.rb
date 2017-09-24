@@ -3,7 +3,4 @@ require_relative 'deck'
 require_relative 'card'
 require_relative 'player'
 
-g = Game.new
-
-g.start_game
-g.d
+Game.new
