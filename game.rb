@@ -31,7 +31,7 @@ class Game
     case tmp
       when 1 then player_step
       when 2 then diller_step
-      when 3 then def_win
+      when 3 then puts def_win
       when 0 then exit
     end
   end
@@ -77,16 +77,20 @@ end
   end
 
   def player_win?
-    if @player.score <= 21 && @player.score > @diller.score
+    
+    if @player.score <= 21 && (@player.score > @diller.score)
       player_win_bank
     end
   end
   def player_win_bank
+    puts @player.display_cards
+    puts "player win"
     @player_money += @bank
     @bank -= @bank
   end
 
   def diller_win?
+    puts @diller.display_cards
     diller_win_bank if @diller.score <= 21 && @diller.score > @player.score
   end
 
@@ -100,8 +104,10 @@ end
       @player_money += 10
       @diller_money += 10
       @bank -= 20
+      puts "DrAW"
     elsif
       @player.score == @diller.score && @player.score >= 21 && @diller.score >= 21
+      puts "d r a w"
     end
   end
 

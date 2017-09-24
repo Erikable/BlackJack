@@ -1,10 +1,9 @@
 class Player
 
-  attr_reader :deck, :cards
+  attr_accessor :deck, :cards
 
   def initialize
     @cards = []
-
   end
 
   def score
@@ -12,6 +11,7 @@ class Player
     @cards.each do |card|
       score += card.value
     end
+    score
   end
 
   def display_cards
