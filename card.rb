@@ -1,7 +1,5 @@
 class Card
 
- # attr_accessor :value, :color
-
   def initialize (value, color)
     @value = value
     @color = color
@@ -20,5 +18,5 @@ class Card
       @value = 10
     end 
   end
-
 end
+

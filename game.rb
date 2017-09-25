@@ -82,32 +82,46 @@ end
   end
 
   def player_win?
-    puts
-    display_player
-    if @player.score <= 21 && (@player.score > @diller.score)
+   # puts
+    #display_player
+    if @player.score <= 21 && @player.score > @diller.score
+      player_win_bank
+    elsif 
+      @diller.score > 21 && !draw?
       player_win_bank
     end
   end
 
   def player_win_bank
-    puts "#{@name} выиграл"
+   # puts "катры диллера были:"
+    #display_diller
     @player_money += @bank
     @bank -= @bank
+    puts "#{@name} выиграл"
+    display_player
     puts "денег y #{@name}: #{@player_money}"
-    #puts @player_money
+    print "\n катры диллера:"
+    display_diller
+    puts
     play_again
   end
 
   def diller_win?
-    puts
-    display_diller
-    diller_win_bank if @diller.score <= 21 && @diller.score > @player.score
+    #puts
+   # display_diller
+    if @diller.score <= 21 && @diller.score > @player.score
+      diller_win_bank 
+    elsif 
+      @player.score > 21 && !draw?
+      diller_win_bank
+    end
   end
 
   def diller_win_bank
-    puts "диллер выиграл"
     @diller_money += @bank
     @bank -= @bank
+    puts "диллер выиграл"
+    display_diller
     puts "деньги диллера: #{@diller_money}"
     play_again
   end
@@ -127,27 +141,25 @@ end
   end
 
   def player_step
-    if @player.cards.count == 2
-      @deck.take_card(@player)
-      puts
-      display_player
-      diller_step
-    elsif 
-      @player.cards.count == 3
+    @deck.take_card(@player)
+    puts
+    #display_player
+    diller_step
+    if @diller.cards.count == 3
       def_win
+    else
+      diller_step
     end
   end
 
   def diller_step
-    if @diller.cards.count == 2
+    if @diller.score < x[1]
       @deck.take_card(@diller)
-      puts
-      puts "карты диллера"
-      @diller.diller_cards
-      player_step
-    elsif 
-      @diller.cards.count == 3
+    end
+    if @player.cards.count == 3
       def_win
+    else
+      player_step
     end
   end
 
@@ -157,6 +169,10 @@ end
     diller_win?
   end
 
+  def x
+    x = [16, 17, 18]
+    x.shuffle
+  end
 end
 
 

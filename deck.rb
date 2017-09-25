@@ -17,12 +17,11 @@ class Deck
 
   def take_card(player)
     player.cards << @deck.slice!(-1)
-    #@deck.pop  # stack level too deep
+    #@deck.pop  # stack level too deep / не в этом была причина
   end
 
   def shuffle
     @deck.shuffle!
   end
-
 end
 
